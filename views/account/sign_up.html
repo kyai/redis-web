@@ -1,0 +1,23 @@
+{{template "header.html" .}}
+<form id="form" onsubmit="return false">
+    Username:
+    <input name="username"><br>
+    Password:
+    <input name="password" type="password"><br>
+</form>
+<button onclick="signup()">next</button>
+
+<script>
+function signup() {
+    $.ajax({
+        url: '/api/SignUp',
+        type: 'POST',
+        data: $('#form').serialize(),
+        success: function(d){
+            console.log(d)
+            if(d.Code != 101) return alert(d.Msg)
+        }
+    })
+}
+</script>
+{{template "footer.html" .}}

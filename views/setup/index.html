@@ -1,22 +1,12 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>config</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
-    <script src="/static/js/jquery.min.js"></script>
-</head>
-<body>
-    <form id="form" onsubmit="return false">
-        Host:
-        <input name="host" value="127.0.0.1"><br>
-        Port:
-        <input name="port" value="6379"><br>
-    </form>
-    <button onclick="checkConn()">next</button>
-</body>
+{{template "header.html" .}}
+<form id="form" onsubmit="return false">
+    Host:
+    <input name="host" value="127.0.0.1"><br>
+    Port:
+    <input name="port" value="6379"><br>
+</form>
+<button onclick="checkConn()">next</button>
+
 <script>
 function checkConn() {
     $.ajax({
@@ -25,11 +15,10 @@ function checkConn() {
         data: $('#form').serialize(),
         success: function(d){
             console.log(d)
-            if(d.Code != 101){
-                alert(d.Msg)
-            }
+            if(d.Code != 101) return alert(d.Msg)
+            window.location.href = 'signup'
         }
     })
 }
 </script>
-</html>
+{{template "footer.html" .}}
